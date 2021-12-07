@@ -16,17 +16,17 @@ class ArithmeticArranger():
 
 		if(valid):
 			for p in self.problems:
-				valid = True
 				terms = p.split()
-
 				if(not terms[0].isdigit() or not terms[2].isdigit()):
 					self.last_error_message = self.ERROR_DIGITS
 					valid = False
 					break
+
 				if(len(terms[0]) > 4 or len(terms[2]) > 4):
 					self.last_error_message = self.ERROR_LENGTH
 					valid = False
 					break
+
 				if(terms[1] not in ['-', '+']):
 					self.last_error_message = self.ERROR_OPERATOR
 					valid = False
