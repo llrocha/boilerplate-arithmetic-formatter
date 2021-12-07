@@ -35,10 +35,6 @@ class ArithmeticArranger():
 		return valid
 
 	@property
-	def error_count(self):
-		return len(self.operators_errors) + len(self.isdigit_errors) + len(self.length_errors)
-
-	@property
 	def last_error(self):
 		return self.last_error_message
 
