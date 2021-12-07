@@ -6,10 +6,6 @@ class ArithmeticArranger():
 
 	def __init__(self, problems):
 		self.problems = problems
-
-		self.operators_errors = []
-		self.isdigit_errors = []
-		self.length_errors = []
 		self.last_error_message = ''
 
 	def validate_problems(self):
@@ -23,28 +19,15 @@ class ArithmeticArranger():
 				valid = True
 				terms = p.split()
 
-				if(not terms[0].isdigit()):
-					self.isdigit_errors.append(self.ERROR_DIGITS)
+				if(not terms[0].isdigit() or not terms[2].isdigit()):
 					self.last_error_message = self.ERROR_DIGITS
 					valid = False
 					break
-				if(not terms[2].isdigit()):
-					self.isdigit_errors.append(self.ERROR_DIGITS)
-					self.last_error_message = self.ERROR_DIGITS
-					valid = False
-					break
-				if(len(terms[0]) > 4):
-					self.length_errors.append(self.ERROR_LENGTH)
-					self.last_error_message = self.ERROR_LENGTH
-					valid = False
-					break
-				if(len(terms[2]) > 4):
-					self.length_errors.append(self.ERROR_LENGTH)
+				if(len(terms[0]) > 4 or len(terms[2]) > 4):
 					self.last_error_message = self.ERROR_LENGTH
 					valid = False
 					break
 				if(terms[1] not in ['-', '+']):
-					self.operators_errors.append(self.ERROR_OPERATOR)
 					self.last_error_message = self.ERROR_OPERATOR
 					valid = False
 					break
@@ -102,10 +85,7 @@ class ArithmeticArranger():
 def arithmetic_arranger(problems, resolve=False):
 	aa = ArithmeticArranger(problems)
 	if(aa.validate_problems()):
-		if(aa.error_count > 5):
-			return aa.ERROR_TOO_MANY
-		else:
-			result = aa.format(resolve)
-			return result
+		result = aa.format(resolve)
+		return result
 	else:
 		return aa.last_error
